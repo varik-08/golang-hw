@@ -6,12 +6,11 @@ import (
 	"io"
 	"os"
 
-	"github.com/fixme_my_friend/hw02_fix_app/types"
+	"github.com/varik-08/golang-hw/hw02_fix_app/types"
 )
 
 func ReadJSON(filePath string) ([]types.Employee, error) {
 	f, err := os.Open(filePath)
-
 	if err != nil {
 		fmt.Printf("Error open file: %v", err)
 
@@ -19,7 +18,6 @@ func ReadJSON(filePath string) ([]types.Employee, error) {
 	}
 
 	bytes, err := io.ReadAll(f)
-
 	if err != nil {
 		fmt.Printf("Error read file: %v", err)
 
@@ -29,6 +27,11 @@ func ReadJSON(filePath string) ([]types.Employee, error) {
 	var data []types.Employee
 
 	err = json.Unmarshal(bytes, &data)
+	if err != nil {
+		fmt.Printf("Error Unmarshal bytes: %v", err)
+
+		return nil, err
+	}
 
 	return data, nil
 }

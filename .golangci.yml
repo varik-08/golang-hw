@@ -8,8 +8,15 @@ linters-settings:
   funlen:
     lines: 150
     statements: 80
-  shadow:
-    strict: true
+  govet:
+    # Report about shadowed variables.
+    # Default: false
+    check-shadowing: true
+    settings:
+      shadow:
+        # Whether to be strict about shadowing; can be noisy.
+        # Default: false
+        strict: true
 
 issues:
   exclude-rules:
@@ -30,7 +37,7 @@ linters:
     - durationcheck
     - errorlint
     - exhaustive
-    - copyloopvar
+    - exportloopref
     - funlen
     - gci
     - gocognit
