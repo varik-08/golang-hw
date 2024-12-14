@@ -1,5 +1,9 @@
 package main
 
+import "fmt"
+
 func main() {
-	// Place your code here.
+	str := "Hello, World! Hello, World!"
+
+	fmt.Println(CountWords(str))
 }
