@@ -8,7 +8,6 @@ import (
 
 func TestCountWords(t *testing.T) {
 	tests := []struct {
-		name     string
 		input    string
 		expected map[string]int
 	}{
