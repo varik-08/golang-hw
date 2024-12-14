@@ -13,24 +13,21 @@ func TestCountWords(t *testing.T) {
 		expected map[string]int
 	}{
 		{
-			name:     "1",
 			input:    "Hello, World! Hello, World!",
 			expected: map[string]int{"Hello": 2, "World": 2},
 		},
 		{
-			name:     "2",
 			input:    "This is a test.",
 			expected: map[string]int{"This": 1, "is": 1, "a": 1, "test": 1},
 		},
 		{
-			name:     "3",
 			input:    "This is a test, with some punctuation.",
 			expected: map[string]int{"This": 1, "is": 1, "a": 1, "test": 1, "with": 1, "some": 1, "punctuation": 1},
 		},
 	}
 
 	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
+		t.Run(tt.input, func(t *testing.T) {
 			result := CountWords(tt.input)
 			require.Equal(t, tt.expected, result)
 		})
