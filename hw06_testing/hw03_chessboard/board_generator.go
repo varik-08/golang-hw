@@ -1,7 +1,9 @@
-package hw03_chessboard
+package hw03
 
-const blackCell = '#'
-const whiteCell = ' '
+const (
+	blackCell = '#'
+	whiteCell = ' '
+)
 
 func generateBoard(size int) [][]rune {
 	board := make([][]rune, size)

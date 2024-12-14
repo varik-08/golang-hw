@@ -1,4 +1,4 @@
-package hw05_shapes
+package hw05
 
 type Rectangle struct {
 	width, height float64

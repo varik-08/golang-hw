@@ -1,4 +1,4 @@
-package hw04_struct_comparator
+package hw04
 
 type Book struct {
 	id     int

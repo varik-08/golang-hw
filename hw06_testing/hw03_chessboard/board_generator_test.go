@@ -1,8 +1,9 @@
-package hw03_chessboard
+package hw03
 
 import (
-	"github.com/stretchr/testify/require"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestGenerateBoard(t *testing.T) {

@@ -1,8 +1,9 @@
-package hw05_shapes
+package hw05
 
 import (
-	"github.com/stretchr/testify/require"
 	"testing"
+
+	"github.com/stretchr/testify/require"
 )
 
 func TestCalculateArea(t *testing.T) {
