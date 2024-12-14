@@ -17,7 +17,7 @@ func CountWords(str string) map[string]int {
 	words := strings.Split(cleanStr, " ")
 
 	for _, word := range words {
-		if _, ok := mapWords[word]; ok {
+		if count := mapWords[word]; count > 0 {
 			mapWords[word]++
 		} else {
 			mapWords[word] = 1
