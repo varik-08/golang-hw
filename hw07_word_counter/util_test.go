@@ -12,7 +12,7 @@ func TestCountWords(t *testing.T) {
 		expected map[string]int
 	}{
 		{
-			input:    "Hello, World! Hello, World!",
+			input:    "Hello, World!\nHello, World!",
 			expected: map[string]int{"Hello": 2, "World": 2},
 		},
 		{

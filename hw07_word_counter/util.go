@@ -14,14 +14,10 @@ func CountWords(str string) map[string]int {
 	mapWords := make(map[string]int)
 	cleanStr := removePunctuation(str)
 
-	words := strings.Split(cleanStr, " ")
+	words := strings.Fields(cleanStr)
 
 	for _, word := range words {
-		if count := mapWords[word]; count > 0 {
-			mapWords[word]++
-		} else {
-			mapWords[word] = 1
-		}
+		mapWords[word]++
 	}
 
 	return mapWords
