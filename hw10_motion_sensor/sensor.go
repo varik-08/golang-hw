@@ -26,7 +26,7 @@ func (sensor *Sensor) Enable() {
 	wg.Add(1)
 
 	go func() {
-		timer := time.NewTimer(5 * time.Second)
+		timer := time.NewTimer(1 * time.Minute)
 		defer timer.Stop()
 
 		for {
