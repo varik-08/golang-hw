@@ -1,22 +1,17 @@
 package main
 
-import "time"
+import "sync"
 
 func main() {
-	doneChannel := make(chan bool)
-	go func() {
-		defer close(doneChannel)
+	wgDone := sync.WaitGroup{}
+	wgDone.Add(1)
 
-		time.Sleep(1 * time.Minute)
-
-		doneChannel <- true
-	}()
-	sensor := NewSensor(&doneChannel)
-	reader := NewReader(sensor, &doneChannel)
+	sensor := NewSensor()
+	reader := NewReader(sensor, &wgDone)
 
 	go sensor.Enable()
 	go reader.Read()
 	go reader.Print()
 
-	<-doneChannel
+	wgDone.Wait()
 }

@@ -1,24 +1,16 @@
 package main
 
 import (
+	"sync"
 	"testing"
-	"time"
 
 	"github.com/stretchr/testify/require"
 )
 
 func TestReader_Read(t *testing.T) {
-	doneChannel := make(chan bool)
-	go func() {
-		defer close(doneChannel)
-
-		time.Sleep(1 * time.Second)
-
-		doneChannel <- true
-	}()
-
-	mockSensor := NewSensor(&doneChannel)
-	reader := NewReader(mockSensor, &doneChannel)
+	wgDone := sync.WaitGroup{}
+	mockSensor := NewSensor()
+	reader := NewReader(mockSensor, &wgDone)
 
 	go reader.Read()
 
@@ -26,12 +18,13 @@ func TestReader_Read(t *testing.T) {
 		mockSensor.DataChannel <- i + 1
 	}
 
-	for {
-		select {
-		case average := <-reader.resultsChannel:
-			require.Equal(t, average, 5.5)
-		case <-doneChannel:
-			return
-		}
+	expectedAverage := 5.5
+	average := -1.0
+
+	for tempAverage := range reader.resultsChannel {
+		average = tempAverage
+		break
 	}
+
+	require.Equal(t, expectedAverage, average)
 }
