@@ -4,37 +4,48 @@ import (
 	"crypto/rand"
 	"fmt"
 	"math/big"
+	"sync"
+	"time"
 )
 
 type Sensor struct {
 	DataChannel chan int
-	doneChannel *chan bool
 }
 
-func NewSensor(doneChannel *chan bool) *Sensor {
+func NewSensor() *Sensor {
 	dataChannel := make(chan int, 10)
 
 	return &Sensor{
 		DataChannel: dataChannel,
-		doneChannel: doneChannel,
 	}
 }
 
 func (sensor *Sensor) Enable() {
 	defer close(sensor.DataChannel)
+	wg := sync.WaitGroup{}
+	wg.Add(1)
 
-	for {
-		select {
-		case <-*sensor.doneChannel:
-			return
-		default:
-			random, err := rand.Int(rand.Reader, big.NewInt(100))
-			if err != nil {
-				fmt.Println("Ошибка генерации рандомного числа: ", err)
-				continue
+	go func() {
+		timer := time.NewTimer(1 * time.Minute)
+		defer timer.Stop()
+
+		for {
+			select {
+			case <-timer.C:
+				wg.Done()
+
+				return
+			default:
+				random, err := rand.Int(rand.Reader, big.NewInt(100))
+				if err != nil {
+					fmt.Println("Ошибка генерации рандомного числа: ", err)
+					continue
+				}
+
+				sensor.DataChannel <- int(random.Int64())
 			}
-
-			sensor.DataChannel <- int(random.Int64())
 		}
-	}
+	}()
+
+	wg.Wait()
 }
