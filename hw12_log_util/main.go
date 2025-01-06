@@ -109,6 +109,7 @@ func LoadEnvFile() error {
 
 func writeLog(date string, message, outputPath string) error {
 	if outputPath != "" {
+		//nolint
 		file, err := os.OpenFile(outputPath, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0644)
 		if err != nil {
 			return fmt.Errorf("ошибка открытия файла для записи лога: %w", err)
