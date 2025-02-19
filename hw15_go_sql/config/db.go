@@ -8,6 +8,7 @@ import (
 	"strconv"
 	"sync"
 
+	//nolint
 	pgx "github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )

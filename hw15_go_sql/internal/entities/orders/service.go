@@ -1,6 +1,7 @@
 package orders
 
 import (
+	//nolint
 	pgx "github.com/jackc/pgx/v5"
 	"github.com/varik-08/golang-hw/hw15_go_sql/config"
 )
