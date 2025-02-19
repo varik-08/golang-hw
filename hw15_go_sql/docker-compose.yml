@@ -1,0 +1,15 @@
+services:
+  db:
+    image: postgres:17-alpine
+    container_name: db
+    environment:
+      POSTGRES_DB: ${APP_DB_DATABASE}
+      POSTGRES_USER: ${APP_DB_USER}
+      POSTGRES_PASSWORD: ${APP_DB_PASSWORD}
+    ports:
+      - ${APP_DB_PORT}:5432
+    volumes:
+      - shop_db:/var/lib/postgresql/data
+
+volumes:
+  shop_db:
