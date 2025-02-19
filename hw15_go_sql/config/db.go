@@ -8,8 +8,7 @@ import (
 	"strconv"
 	"sync"
 
-	//nolint
-	pgx "github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -19,6 +18,7 @@ var (
 )
 
 func NewDB(ctx context.Context, dbCfg DB) (*pgxpool.Pool, error) {
+	//nolint
 	connConfig, err := pgx.ParseConfig(
 		fmt.Sprintf(
 			"postgres://%s:%s@%s/%s?TimeZone=Europe/Moscow",

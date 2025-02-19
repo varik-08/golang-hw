@@ -1,8 +1,7 @@
 package orders
 
 import (
-	//nolint
-	pgx "github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5"
 	"github.com/varik-08/golang-hw/hw15_go_sql/config"
 )
 
@@ -37,6 +36,7 @@ func CreateOrder(dto OrderDTO) (int, error) {
 	ctx := config.GetCTX()
 	dbPool := config.GetDB()
 
+	//nolint
 	tx, err := dbPool.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		return 0, err
@@ -75,6 +75,7 @@ func DeleteOrder(dto OrderDTO) (int, error) {
 	ctx := config.GetCTX()
 	dbPool := config.GetDB()
 
+	//nolint
 	tx, err := dbPool.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil {
 		return 0, err
