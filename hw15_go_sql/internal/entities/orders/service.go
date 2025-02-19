@@ -1,7 +1,7 @@
 package orders
 
 import (
-	"github.com/jackc/pgx/v5"
+	pgx "github.com/jackc/pgx/v5"
 	"github.com/varik-08/golang-hw/hw15_go_sql/config"
 )
 
