@@ -17,9 +17,10 @@ services:
       POSTGRES_USER: ${APP_DB_USER}
       POSTGRES_PASSWORD: ${APP_DB_PASSWORD}
     ports:
-      - ${APP_DB_PORT}:5432
+      - ${APP_DB_PORT}:${APP_DB_PORT}
     volumes:
       - shop_db:/var/lib/postgresql/data
+    command: ["postgres", "-c", "port=${APP_DB_PORT}"]
 
 volumes:
   shop_db:
